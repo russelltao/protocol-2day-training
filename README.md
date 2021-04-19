@@ -17,6 +17,47 @@ yum install tcpdump -y
 apt-get install tcpdump -y
 ```
 
+# 相关书籍及RFC等在线文档
+## 抓包工具用法
+
+1. Chrome Dev Tools上Google官方有详细的说明文档，可以在线学习：[Chrome Network面板](https://developers.google.com/web/tools/chrome-devtools/network)
+
+2. 关于Wireshark，目前官网上的文档还非常零碎，相对来说，[《Wireshark数据包分析实战》](https://book.douban.com/subject/21691692/)这本书可以更快速、系统地学习Wireshark的用法。
+
+
+## HTTP/1协议
+
+1. ASCII码是最基础、最常用的编码规则，当我们基于原始报文做协议分析时，了解ASCII码的编码方式是很有必要的：[ASCII码](https://baike.baidu.com/item/ASCII)
+
+2. HTTP是遵循REST架构而设计的协议，了解REST架构的定义可以参照这篇论文：
+论文[《架构风格与基于网络的软件架构设计》](https://github.com/russelltao/protocol-2day-training/blob/main/%E6%9E%B6%E6%9E%84%E9%A3%8E%E6%A0%BC%E4%B8%8E%E5%9F%BA%E4%BA%8E%E7%BD%91%E7%BB%9C%E7%9A%84%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.pdf)
+
+3. 虽然网上关于HTTP/1协议的资料很多，但大都比较零散，这本书相对比较系统易读，可以参考书籍：[《HTTP权威指南》](https://book.douban.com/subject/10746113/)
+
+4. HTTP协议是Web架构中的核心协议，而Web中由于浏览器共享访问多个站点，引入的很多安全问题都需要HTTP协议配合解决。由于这类知识比较零碎，相关书籍并不多，可以参考下这本书：[《白帽子讲Web安全》](https://book.douban.com/subject/10546925/)
+
+## HTTP/2协议
+
+1. 在熟悉HTTP/1协议的前提下，理解HTTP/2并不困难。此时可以直接阅读第一手的RFC文档来学习：[RFC7540](https://tools.ietf.org/html/rfc7540)以及头部编码[HPACK](https://tools.ietf.org/html/rfc7541)
+2. HPACK、gzip等压缩算法都使用到了Huffman编码，如果希望进一步深挖编码知识，可以看下Huffman树的构造原理：[Huffman编码](https://baike.baidu.com/item/%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91)
+
+## HTTP/3协议
+
+HTTP3的正式规范还未颁布，但草案已经很成熟。学习HTTP3协议目前只能从5个草案中入手，包括：
+
+1. 首先要学习HTTP3有序字符流、连接迁移等功能的实现，这可以通过下面这个草案学习：[RFC Draft：QUIC](https://tools.ietf.org/html/draft-ietf-quic-transport-34)
+2. 由于HTTP3基于UDP协议，所以无法直接像TCP协议那样，仅加密TCP上承载的信息内容。HTTP3还需要加密QUIC头部中的字段，这由下面的草案定义：[RFC Draft：QUIC+TLS](https://tools.ietf.org/html/draft-ietf-quic-tls-34)
+3. TCP中实现的重传策略、拥塞控制，都需要HTTP3重新实现：[RFC Draft：丢包重传](https://tools.ietf.org/html/draft-ietf-quic-recovery-34)
+4. HTTP2中的头部压缩协议HPACK仅适用于TCP协议，且不能应对HOL Blocking问题，QPACK对此做了改进：[RFC Draft：QPACK](https://tools.ietf.org/html/draft-ietf-quic-qpack-21)
+5. HTTP3应用层的语法由下面的草案定义：[RFC Draft：HTTP3](https://tools.ietf.org/html/draft-ietf-quic-http-34)
+
+## TLS/SSL协议
+1. [《HTTPS权威指南》](https://book.douban.com/subject/26869219/)是比较易读的TLS/SSL协议书籍，可以先从这本书入手，了解HTTPS协议。
+2. 密码学博大精深，如果需要进一步了解，可以阅读书籍[《应用密码学：协议、算法与C源程序》](https://book.douban.com/subject/1088180/)，虽然年代有些久远，但从深度、原理上来说，目前我认为它还是很好的选择。
+
+## TCP/IP协议
+书籍[《TCP/IP指南》](https://book.douban.com/subject/3062468/)更易读，推荐给你。
+
 # k8s抓包测试环境
 
 ## 查看虚拟网卡veth pair
